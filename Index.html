@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>BrightWash · Car & Bike</title>
+  <!-- Font Awesome Icons (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.5;
+      padding: 0 1rem 2rem;
+    }
+
+    /* black & yellow stripe — road tape vibe */
+    .stripe {
+      height: 6px;
+      background: repeating-linear-gradient(90deg, #000 0px, #000 20px, #f5c542 20px, #f5c542 40px);
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* header */
+    .brand {
+      margin: 2rem 0 1rem;
+      text-align: center;
+    }
+
+    .brand h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: #000;
+      color: #fff;
+      display: inline-block;
+      padding: 0.3rem 1.8rem 0.4rem;
+      border-radius: 40px;
+      box-shadow: 0 4px 0 #f5c542;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: #444;
+      margin-top: 0.6rem;
+      font-weight: 350;
+      letter-spacing: 0.3px;
+    }
+
+    /* contact bar — minimal */
+    .info-panel {
+      background: #f8f8f8;
+      border-radius: 28px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #eaeaea;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.95rem;
+      color: #222;
+    }
+
+    .info-item i {
+      color: #f5c542;
+      font-size: 1.1rem;
+      width: 1.4rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .info-item span {
+      font-weight: 430;
+    }
+
+    .closed {
+      background: #000;
+      color: #f5c542;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* address line */
+    .address-block {
+      text-align: center;
+      margin: 1rem 0 2rem;
+      font-size: 1rem;
+      border-left: 4px solid #f5c542;
+      background: #fafafa;
+      padding: 0.9rem 1rem;
+      border-radius: 18px;
+      font-weight: 360;
+    }
+
+    .address-block i {
+      color: #f5c542;
+      margin-right: 8px;
+    }
+
+    /* service cards — two bold options */
+    .service-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1.5px solid #ececec;
+      border-radius: 32px;
+      padding: 1.6rem 1.8rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    }
+
+    .service-card:hover {
+      border-color: #f5c542;
+      box-shadow: 0 8px 20px rgba(245, 197, 66, 0.12);
+    }
+
+    .price-tag {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: #000;
+      color: #f5c542;
+      display: inline-block;
+      padding: 0.2rem 1.6rem;
+      border-radius: 60px;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+      border: 2px solid #f5c542;
+    }
+
+    .service-title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin: 0.3rem 0 1rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 1rem 0 1.4rem;
+    }
+
+    .feature-list li {
+      margin: 0.6rem 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+    }
+
+    .feature-list i.fa-check-circle {
+      color: #f5c542;
+      font-weight: 600;
+    }
+
+    .basic-note {
+      font-size: 0.9rem;
+      color: #555;
+      border-top: 1px dashed #ccc;
+      padding-top: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    /* booking form – ultra clean */
+    .form-section {
+      background: #fff;
+      border-radius: 32px;
+      padding: 2rem 1.5rem;
+      border: 1px solid #e0e0e0;
+      margin: 2rem 0;
+    }
+
+    .form-section h3 {
+      font-weight: 450;
+      font-size: 1.5rem;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.3px;
+    }
+
+    .input-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #444;
+      margin-bottom: 0.4rem;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      font-size: 1rem;
+      border: 1.5px solid #ddd;
+      border-radius: 40px;
+      background: #fafafa;
+      transition: 0.15s;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #f5c542;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(245, 197, 66, 0.2);
+    }
+
+    .dual-action {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0 0.5rem;
+    }
+
+    .pay-btn {
+      flex: 1 1 180px;
+      background: #000;
+      color: white;
+      border: none;
+      padding: 1.2rem 1rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 2px solid #000;
+      transition: 0.15s;
+      cursor: pointer;
+    }
+
+    .pay-btn i {
+      color: #f5c542;
+      font-size: 1.2rem;
+    }
+
+    .pay-btn:hover {
+      background: #1a1a1a;
+      border-color: #f5c542;
+    }
+
+    .pay-btn.premium {
+      background: #f5c542;
+      color: #000;
+      border-color: #f5c542;
+    }
+
+    .pay-btn.premium i {
+      color: #000;
+    }
+
+    .pay-btn.premium:hover {
+      background: #e0b338;
+    }
+
+    .fine-print {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: 1rem;
+    }
+
+    /* testimonials – minimal placeholder */
+    .testimonials {
+      margin: 3rem 0 2rem;
+    }
+
+    .testimonials h4 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      border-bottom: 3px solid #f5c542;
+      display: inline-block;
+      padding-bottom: 0.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .testi-item {
+      background: #f6f6f6;
+      border-radius: 28px;
+      padding: 1.2rem;
+      flex: 1 1 calc(50% - 0.5rem);
+      border: 1px solid #ececec;
+      font-size: 0.9rem;
+    }
+
+    .testi-item i {
+      color: #f5c542;
+      margin-right: 4px;
+    }
+
+    .testi-item p {
+      margin: 0.5rem 0 0.2rem;
+      font-style: italic;
+    }
+
+    .testi-item .name {
+      font-weight: 600;
+      margin-top: 0.5rem;
+      color: #111;
+    }
+
+    /* quick links footer */
+    .quick-links {
+      margin-top: 2.5rem;
+      padding: 1.5rem 0;
+      border-top: 2px solid #f5c542;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem 2rem;
+    }
+
+    .quick-links a {
+      color: #000;
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 460;
+      transition: 0.1s;
+    }
+
+    .quick-links a i {
+      color: #f5c542;
+      font-size: 1.1rem;
+    }
+
+    .quick-links a:hover {
+      color: #f5c542;
+    }
+
+    /* small */
+    .whatsapp-note {
+      background: #f0f0f0;
+      padding: 0.8rem;
+      border-radius: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+<div class="stripe"></div>
+<div class="container">
+
+  <!-- brand -->
+  <div class="brand">
+    <h1>BrightWash</h1>
+    <div class="tagline">Car & Bike • Waterless • Premium</div>
+  </div>
+
+  <!-- contact + timing strip -->
+  <div class="info-panel">
+    <div class="info-item"><i class="fab fa-whatsapp"></i><span>9808669522</span></div>
+    <div class="info-item"><i class="fas fa-phone-alt"></i><span>9520333007</span></div>
+    <div class="info-item"><i class="far fa-clock"></i><span>11 am – 8 pm</span></div>
+    <div class="closed">FRI CLOSED</div>
+  </div>
+
+  <!-- address -->
+  <div class="address-block">
+    <i class="fas fa-map-pin"></i> Nanki hospital ke barabar me, Roorkee road, Muzaffarnagar 251001
+  </div>
+
+  <!-- SERVICE CARDS (exactly two) -->
+  <div class="service-grid">
+    <!-- 99 card -->
+    <div class="service-card" id="basicCard">
+      <div class="price-tag">₹99</div>
+      <div class="service-title">Top Body Wash</div>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> High-pressure hand wash</li>
+        <li><i class="fas fa-check-circle"></i> Wheel cleaning</li>
+        <li><i class="fas fa-check-circle"></i> Lift & exterior dry</li>
+      </ul>
+      <div class="basic-note"><i class="fas fa-water"></i> includes tyre cleaning</div>
+    </div>
+
+    <!-- 299 premium card -->
+    <div class="service-card" id="premiumCard">
+      <div class="price-tag">₹299</div>
+      <div class="service-title">Premium Wash</div>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Top body wash + tyres</li>
+        <li><i class="fas fa-check-circle"></i> Interior vacuum & mats</li>
+        <li><i class="fas fa-check-circle"></i> Dashboard cleaning & polish</li>
+        <li><i class="fas fa-check-circle"></i> Carpet & glass wipe</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- BOOKING FORM -->
+  <div class="form-section">
+    <h3>📋 book your slot</h3>
+    <div class="input-group">
+      <label>Your name</label>
+      <input type="text" id="fullName" placeholder="e.g. Shah Alam" autocomplete="name">
+    </div>
+    <div class="input-group">
+      <label>Phone / WhatsApp</label>
+      <input type="tel" id="phoneNum" placeholder="10-digit mobile" autocomplete="tel">
+    </div>
+    <div class="input-group">
+      <label>Vehicle number</label>
+      <input type="text" id="vehicleNum" placeholder="UP12 XY 1234" autocomplete="off">
+    </div>
+
+    <!-- two big action buttons for each service -->
+    <div class="dual-action">
+      <button class="pay-btn" id="payBasicBtn"><i class="fas fa-bolt"></i> Pay ₹99</button>
+      <button class="pay-btn premium" id="payPremiumBtn"><i class="fas fa-sparkles"></i> Pay ₹299</button>
+    </div>
+    <div class="fine-print">
+      <i class="fas fa-shield-alt"></i> after payment, WhatsApp will open automatically
+    </div>
+  </div>
+
+  <!-- Testimonials (placeholder – you can replace with actual images/reviews) -->
+  <div class="testimonials">
+    <h4>⭐ google reviews</h4>
+    <div class="testimonial-grid">
+      <div class="testi-item">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <p>“Best car wash in town, premium finish and friendly staff.”</p>
+        <div class="name">– Ramesh, Swift</div>
+      </div>
+      <div class="testi-item">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <p>“Very thorough interior cleaning. My bike looks brand new.”</p>
+        <div class="name">– Priya, Activa</div>
+      </div>
+      <div class="testi-item">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i>
+        <p>“Quick service and they use good pressure equipment.”</p>
+        <div class="name">– Vikas, i10</div>
+      </div>
+      <div class="testi-item">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <p>“Reasonable price, 299 wash is totally worth it.”</p>
+        <div class="name">– Anjali, Baleno</div>
+      </div>
+    </div>
+    <!-- hint for google business link (will be added below) -->
+  </div>
+
+  <!-- QUICK LINKS (footer) -->
+  <div class="quick-links">
+    <a href="#" id="googleBusinessLink" target="_blank"><i class="fab fa-google"></i> Google Business</a>
+    <a href="https://wa.me/919808669522" target="_blank"><i class="fab fa-whatsapp"></i> Direct WhatsApp</a>
+    <a href="tel:+9195280333007"><i class="fas fa-phone"></i> Call now</a>
+    <a href="#"><i class="fas fa-directions"></i> Directions</a>
+  </div>
+
+  <!-- small note with upi info -->
+  <div class="whatsapp-note">
+    <i class="fas fa-exchange-alt"></i> UPI ID: <strong>brightwash@okhdfcbank</strong> (change in code if needed)
+  </div>
+</div>
+
+<script>
+  (function() {
+    // CONFIGURATION — 🔧 replace with your own UPI ID and whatsapp number
+    const UPI_ID = 'brightwash@okhdfcbank';    // <-- CHANGE THIS to your actual UPI VPA
+    const BUSINESS_WHATSAPP = '919808669522';  // with country code (without +)
+    const BUSINESS_PHONE = '9520333007';        // shown, not used in link
+
+    // Google business profile link – replace with yours
+    const GOOGLE_BUSINESS_URL = 'https://g.page/r/your-google-business-page'; // placeholder
+
+    // set google business link
+    document.getElementById('googleBusinessLink').href = GOOGLE_BUSINESS_URL;
+
+    // Helper: get form values
+    function getFormValues() {
+      return {
+        name: document.getElementById('fullName').value.trim(),
+        phone: document.getElementById('phoneNum').value.trim(),
+        vehicle: document.getElementById('vehicleNum').value.trim()
+      };
+    }
+
+    // basic validation
+    function validateForm() {
+      const { name, phone, vehicle } = getFormValues();
+      if (!name || !phone || !vehicle) {
+        alert('Please fill in all fields: Name, Phone, Vehicle number');
+        return false;
+      }
+      if (phone.length < 10 || phone.length > 15 || !/^\d+$/.test(phone)) {
+        alert('Enter a valid phone number (digits only, 10-15 digits)');
+        return false;
+      }
+      return true;
+    }
+
+    // build UPI link (amount in paise? no, just decimal)
+    function getUpiLink(amount) {
+      // UPI://PAY?PA=merchantvpa@upi&PN=BrightWash&AM=99&CU=INR
+      return `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=BrightWash&am=${amount}&cu=INR`;
+    }
+
+    // build whatsapp message & link
+    function getWhatsappLink(serviceName, amount, name, phone, vehicle) {
+      const text = `New booking for *${serviceName}* · ₹${amount} · Vehicle: ${vehicle} · Name: ${name} · Phone: ${phone} (paid via UPI)`;
+      const encoded = encodeURIComponent(text);
+      return `https://wa.me/${BUSINESS_WHATSAPP}?text=${encoded}`;
+    }
+
+    // main action: trigger UPI + then WhatsApp (with tiny delay)
+    function handlePayment(serviceName, amount) {
+      if (!validateForm()) return;
+
+      const { name, phone, vehicle } = getFormValues();
+
+      // 1. UPI intent link
+      const upiLink = getUpiLink(amount);
+
+      // 2. WhatsApp confirmation link
+      const waLink = getWhatsappLink(serviceName, amount, name, phone, vehicle);
+
+      // try to open UPI app (will switch away from page)
+      window.location.href = upiLink;
+
+      // after a short delay (2 sec) open WhatsApp in new tab
+      // this gives user time to complete UPI and come back,
+      // or the browser may open both.
+      setTimeout(() => {
+        window.open(waLink, '_blank');
+      }, 2000);
+
+      // optional: tiny feedback
+      console.log('UPI link opened, WhatsApp will follow.');
+    }
+
+    // Attach to buttons
+    document.getElementById('payBasicBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      handlePayment('Basic Body Wash', 99);
+    });
+
+    document.getElementById('payPremiumBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      handlePayment('Premium interior + body wash', 299);
+    });
+
+    // optional: quick link direction (google maps placeholder)
+    document.querySelector('a[href="#"]:has(.fa-directions)')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open('https://maps.google.com/?q=Nanki+hospital+Muzaffarnagar+Roorkee+road', '_blank');
+    });
+
+  })();
+</script>
+
+<!-- manual fallback for very old browsers -->
+<noscript>
+  <div style="background: #f5c542; padding:1rem; text-align:center;">Please enable JavaScript to book online.</div>
+</noscript>
+</body>
+</html>
